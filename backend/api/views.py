@@ -32,7 +32,7 @@ class CreateCardAPIView(CreateAPIView):
 
 
 class BuyTicketAPIView(GenericAPIView):
-    permission_classes = (IsAuthenticated)
+    permission_classes = (IsAuthenticated,)
     serializer_class = serializers.TicketSerializer
 
     def post(self, request: Request):
