@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 
 from . import models
 
@@ -32,3 +32,12 @@ class CardSerializer(ModelSerializer):
     class Meta:
         model = models.Card
         fields = '__all__'
+
+
+class TicketSerializer(ModelSerializer):
+    event = PrimaryKeyRelatedField(queryset=models.Event.objects.all())
+
+    class Meta:
+        model = models.Ticket
+        fields = '__all__'
+        depth = 1

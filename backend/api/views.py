@@ -1,9 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, GenericAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
-from . import models, serializers
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg.openapi import Parameter, IN_BODY, TYPE_STRING
+from . import models, serializers, utils
 
 
 class CategoryViewSet(ModelViewSet):
@@ -21,6 +23,25 @@ class CreateCardAPIView(CreateAPIView):
     serializer_class = serializers.CardSerializer
 
 
-class VerifyPassportAPIView(APIView):
+class BuyTicketAPIView(GenericAPIView):
+    serializer_class = serializers.TicketSerializer
+
     def post(self, request: Request):
-        return Response({'valid': True}, 200)
+        data = request['data']
+        ticket = models.Ticket.objects.create(
+            price=data.get('price', None),
+            user=request.user,
+            event=request.event,
+        )
+        return Response(self.serializer_class(ticket).data)
+
+
+class VerifyPassportAPIView(APIView):
+    # @swagger_auto_schema(request_body=[
+    #     Parameter('series', IN_BODY, type=TYPE_STRING),
+    #     Parameter('number', IN_BODY, type=TYPE_STRING),
+    # ])
+    def post(self, request: Request):
+        data = request.data
+        valid = utils.check_password(data['series'], data['number'])
+        return Response({'valid': valid}, 200)
