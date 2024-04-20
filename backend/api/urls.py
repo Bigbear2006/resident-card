@@ -6,6 +6,8 @@ from . import views
 router = DefaultRouter()
 router.register('categories', views.CategoryViewSet, 'categories')
 router.register('events', views.EventViewSet, 'events')
+router.register('hospitals', views.HospitalViewSet, 'hospitals')
+router.register('banks', views.BankViewSet, 'banks')
 
 urlpatterns = router.urls + [
     path('create-card/', views.CreateCardAPIView.as_view()),

@@ -1,8 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView, GenericAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from . import models, serializers, utils
 
 
@@ -16,20 +16,30 @@ class EventViewSet(ModelViewSet):
     serializer_class = serializers.EventSerializer
 
 
+class HospitalViewSet(ModelViewSet):
+    queryset = models.Hospital.objects.all()
+    serializer_class = serializers.HospitalSerializer
+
+
+class BankViewSet(ModelViewSet):
+    queryset = models.Bank.objects.all()
+    serializer_class = serializers.BankSerializer
+
+
 class CreateCardAPIView(CreateAPIView):
     queryset = models.Card.objects.all()
     serializer_class = serializers.CardSerializer
 
 
 class BuyTicketAPIView(GenericAPIView):
+    permission_classes = (IsAuthenticated)
     serializer_class = serializers.TicketSerializer
 
     def post(self, request: Request):
         data = request['data']
         ticket = models.Ticket.objects.create(
-            price=data.get('price', None),
-            user=request.user,
-            event=request.event,
+            owner=request.user,
+            event=data['event'],
         )
         return Response(self.serializer_class(ticket).data)
 

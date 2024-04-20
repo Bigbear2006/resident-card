@@ -46,3 +46,21 @@ class Card(models.Model):
 class Bid(models.Model):
     card = models.OneToOneField(Card, models.CASCADE, related_name='bid')
     staff = models.ForeignKey(User, models.SET_NULL, 'bids', null=True)
+
+
+class Hospital(models.Model):
+    title = models.CharField(max_length=255)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+    def __str__(self):
+        return self.title
+
+
+class Bank(models.Model):
+    title = models.CharField(max_length=255)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+    def __str__(self):
+        return self.title

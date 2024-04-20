@@ -52,3 +52,15 @@ class PassportSerializer(Serializer):
 
     def update(self, instance, validated_data):
         pass
+
+
+class HospitalSerializer(ModelSerializer):
+    class Meta:
+        model = models.Hospital
+        fields = '__all__'
+
+
+class BankSerializer(ModelSerializer):
+    class Meta:
+        model = models.Bank
+        fields = '__all__'
