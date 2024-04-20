@@ -8,4 +8,5 @@ urlpatterns = [
     path('refresh-token/', token_refresh),
     path('register-user/', views.RegisterUserAPIView.as_view()),
     path('user-info/', views.UserInfoAPIView.as_view()),
+    path('update-user/', views.UpdateUserAPIView.as_view()),
 ]
