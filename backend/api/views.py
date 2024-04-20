@@ -17,6 +17,11 @@ class EventViewSet(ModelViewSet):
     serializer_class = serializers.EventSerializer
 
 
+class CategoryEventViewSet(ModelViewSet):
+    queryset = models.CategoryEvent.objects.all()
+    serializer_class = serializers.CategoryEventSerializer
+
+
 class HospitalViewSet(ModelViewSet):
     queryset = models.Hospital.objects.all()
     serializer_class = serializers.HospitalSerializer

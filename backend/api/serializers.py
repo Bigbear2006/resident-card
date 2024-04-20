@@ -21,6 +21,12 @@ class EventWithoutCategoriesSerializer(ModelSerializer):
         exclude = ('categories',)
 
 
+class CategoryEventSerializer(ModelSerializer):
+    class Meta:
+        model = models.CategoryEvent
+        fields = '__all__'
+
+
 class EventSerializer(ModelSerializer):
     class Meta:
         model = models.Event

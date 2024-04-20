@@ -6,6 +6,7 @@ from . import views
 router = DefaultRouter()
 router.register('categories', views.CategoryViewSet, 'categories')
 router.register('events', views.EventViewSet, 'events')
+router.register('category-event', views.CategoryEventViewSet, 'category-event')
 router.register('hospitals', views.HospitalViewSet, 'hospitals')
 router.register('banks', views.BankViewSet, 'banks')
 router.register('cards', views.CardViewSet, 'cards')

@@ -16,13 +16,18 @@ class Event(models.Model):
     description = models.TextField()
     age_limit = models.CharField(max_length=5)
     address = models.CharField(max_length=255)
-    categories = models.ManyToManyField(Category, 'events')
+    categories = models.ManyToManyField(Category, 'events', through='CategoryEvent')
     ticket_count = models.IntegerField()
     price = models.IntegerField()
     date = models.DateTimeField()
 
     def __str__(self):
         return self.title
+
+
+class CategoryEvent(models.Model):
+    category = models.ForeignKey(Category, models.CASCADE)
+    event = models.ForeignKey(Event, models.CASCADE)
 
 
 class Ticket(models.Model):
