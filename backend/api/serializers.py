@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
+from rest_framework.serializers import ModelSerializer, Serializer, PrimaryKeyRelatedField, CharField
 
 from . import models
 
@@ -41,3 +41,14 @@ class TicketSerializer(ModelSerializer):
         model = models.Ticket
         fields = '__all__'
         depth = 1
+
+
+class PassportSerializer(Serializer):
+    series = CharField()
+    number = CharField()
+
+    def create(self, validated_data):
+        pass
+
+    def update(self, instance, validated_data):
+        pass

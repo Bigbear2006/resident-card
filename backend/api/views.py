@@ -3,8 +3,6 @@ from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView, GenericAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg.openapi import Parameter, IN_BODY, TYPE_STRING
 from . import models, serializers, utils
 
 
@@ -36,11 +34,9 @@ class BuyTicketAPIView(GenericAPIView):
         return Response(self.serializer_class(ticket).data)
 
 
-class VerifyPassportAPIView(APIView):
-    # @swagger_auto_schema(request_body=[
-    #     Parameter('series', IN_BODY, type=TYPE_STRING),
-    #     Parameter('number', IN_BODY, type=TYPE_STRING),
-    # ])
+class VerifyPassportAPIView(GenericAPIView):
+    serializer_class = serializers.PassportSerializer
+
     def post(self, request: Request):
         data = request.data
         valid = utils.check_password(data['series'], data['number'])

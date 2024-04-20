@@ -1,6 +1,7 @@
 from django.db import models
 
 from jwt_auth.models import User
+from . import utils
 
 
 class Category(models.Model):
@@ -30,11 +31,11 @@ class Ticket(models.Model):
 
 
 class Card(models.Model):
-    number = models.BigIntegerField()
-    cvv = models.IntegerField()
+    number = models.BigIntegerField(default=utils.make_card_number)
+    cvv = models.IntegerField(default=utils.make_cvv)
     owner = models.ForeignKey(User, models.CASCADE, 'cards')
     for_kid = models.BooleanField()
-    status = models.CharField(max_length=100)
+    status = models.CharField(max_length=100, default='Отправлена на модерацию')
     category = models.CharField(max_length=100)
     certificate = models.ImageField(upload_to='certificates/')
 

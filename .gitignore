@@ -2,5 +2,6 @@
 /venv
 /frontend
 /static
+/media
 
 .env

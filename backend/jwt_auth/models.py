@@ -13,8 +13,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=50, null=True)
     birthday = models.DateField()
-    passport_series = EncryptedField()
-    passport_number = EncryptedField()
+    passport_series = models.TextField()
+    passport_number = models.TextField()
 
     def get_full_name(self):
         return self.username
