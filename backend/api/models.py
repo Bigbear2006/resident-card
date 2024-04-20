@@ -45,11 +45,12 @@ class Card(models.Model):
     certificate = models.ImageField(upload_to='certificates/')
 
     def __str__(self):
-        return self.number
+        return str(self.number)
 
 
 class Hospital(models.Model):
     title = models.CharField(max_length=255)
+    url = models.URLField()
     latitude = models.FloatField()
     longitude = models.FloatField()
 
