@@ -1,8 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.generics import CreateAPIView, GenericAPIView
+from rest_framework.generics import GenericAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action
 from . import models, serializers, utils
 
 
@@ -26,9 +27,14 @@ class BankViewSet(ModelViewSet):
     serializer_class = serializers.BankSerializer
 
 
-class CreateCardAPIView(CreateAPIView):
+class CardViewSet(ModelViewSet):
     queryset = models.Card.objects.all()
     serializer_class = serializers.CardSerializer
+
+    @action(['GET'], False, 'pending')
+    def get_pending_cards(self, request: Request):
+        data = self.serializer_class(self.queryset.filter(status='Отправлена на рассмотрение'), many=True).data
+        return Response(data, 200)
 
 
 class BuyTicketAPIView(GenericAPIView):

@@ -34,18 +34,13 @@ class Card(models.Model):
     number = models.BigIntegerField(default=utils.make_card_number)
     cvv = models.IntegerField(default=utils.make_cvv)
     owner = models.ForeignKey(User, models.CASCADE, 'cards')
-    for_kid = models.BooleanField()
+    for_kid = models.BooleanField(default=False)
     status = models.CharField(max_length=100, default='Отправлена на модерацию')
     category = models.CharField(max_length=100)
     certificate = models.ImageField(upload_to='certificates/')
 
     def __str__(self):
         return self.number
-
-
-class Bid(models.Model):
-    card = models.OneToOneField(Card, models.CASCADE, related_name='bid')
-    staff = models.ForeignKey(User, models.SET_NULL, 'bids', null=True)
 
 
 class Hospital(models.Model):

@@ -8,9 +8,9 @@ router.register('categories', views.CategoryViewSet, 'categories')
 router.register('events', views.EventViewSet, 'events')
 router.register('hospitals', views.HospitalViewSet, 'hospitals')
 router.register('banks', views.BankViewSet, 'banks')
+router.register('cards', views.CardViewSet, 'cards')
 
 urlpatterns = router.urls + [
-    path('create-card/', views.CreateCardAPIView.as_view()),
     path('buy-ticket/', views.BuyTicketAPIView.as_view()),
     path('verify-passport/', views.VerifyPassportAPIView.as_view()),
 ]

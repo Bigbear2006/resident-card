@@ -1,10 +1,7 @@
 import random
 import string
-import logging
 
 import requests
-
-log = logging.getLogger('django')
 
 
 def check_password(series, number):
@@ -15,7 +12,7 @@ def check_password(series, number):
 
     rsp = requests.post('https://proverk.ru/ajax.php', data=data)
     data = rsp.json()
-    log.warning(rsp.text)
+
     if data['result'] == 'error':
         return False
     return data['passport_serial'].startswith('60') and data['result'] == 'valid'
