@@ -42,7 +42,7 @@ class Card(models.Model):
     for_kid = models.BooleanField(default=False)
     status = models.CharField(max_length=100, default='Отправлена на модерацию')
     category = models.CharField(max_length=100)
-    certificate = models.ImageField(upload_to='certificates/')
+    certificate = models.ImageField(upload_to='certificates/', null=True)
 
     def __str__(self):
         return str(self.number)

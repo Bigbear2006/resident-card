@@ -39,6 +39,11 @@ class CardSerializer(ModelSerializer):
         model = models.Card
         fields = '__all__'
 
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data.update(owner=user)
+        return super(CardSerializer, self).create(validated_data)
+
 
 class TicketSerializer(ModelSerializer):
     event = PrimaryKeyRelatedField(queryset=models.Event.objects.all())
