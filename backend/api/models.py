@@ -18,6 +18,7 @@ class Event(models.Model):
     address = models.CharField(max_length=255)
     categories = models.ManyToManyField(Category, 'events')
     ticket_count = models.IntegerField()
+    price = models.IntegerField()
     date = models.DateTimeField()
 
     def __str__(self):
@@ -25,7 +26,6 @@ class Event(models.Model):
 
 
 class Ticket(models.Model):
-    price = models.IntegerField()
     event = models.ForeignKey(Event, models.CASCADE, 'tickets')
     owner = models.ForeignKey(User, models.CASCADE, 'tickets')
 

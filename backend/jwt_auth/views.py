@@ -13,7 +13,7 @@ class RegisterUserAPIView(CreateAPIView):
 
 
 class UserInfoAPIView(GenericAPIView):
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     serializer_class = serializers.UserSerializer
 
     def get(self, request: Request):
