@@ -15,7 +15,9 @@ class UserSerializer(ModelSerializer):
             'passport_number', 'is_staff', 'cards', 'tickets',
         )
         extra_kwargs = {
-            'password': {'write_only': True}
+            'password': {'write_only': True},
+            'passport_series': {'write_only': True},
+            'passport_number': {'write_only': True},
         }
 
     def create(self, validated_data):

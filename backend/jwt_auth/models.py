@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
-from .fields import EncryptedField
+from encrypted_field import EncryptedField
 
 
 class User(AbstractUser):

@@ -40,8 +40,9 @@ class CardSerializer(ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        user = self.context['request'].user
-        validated_data.update(owner=user)
+        if self.context['request'].method == 'POST':
+            user = self.context['request'].user
+            validated_data.update(owner=user)
         return super(CardSerializer, self).create(validated_data)
 
 
